@@ -22,13 +22,15 @@
 %% Set up loading paths
 delete(gcp('nocreate'))
 clear; clc;
-evalc('setup_analysispath(5);'); % files from Ketamine folder and misc folder
-evalc('setup_analysispath(6);'); % files from AV101 folder
+%%%% add all necessary paths here
 eeglab;
 clear
 close all
 clc
-[filenames] = av101_filenames('/data/smathew/AV-101/data/');% generate nested structure with complete file paths
+[filenames] = av101_filenames('path with files to use');% generate nested structure with complete file paths 
+% filenames is only really necessary with a high volume of data where naming conventions might share similarities but contain errors.
+% this can be generated manually if necessary.
+
 rmpath('/data/rcho/TOOLS/eeglab14_1_1b/plugins/AAR131130/');
 % loading variables
 visits = {'V2','V3','V4'};
@@ -44,8 +46,8 @@ fnames = fieldnames(filenames); % subject codes
 mmn_evcodes = [1,2,99];
 mmn_altcodes = [5,6,103];
 % Visit 2
-savepath = '/data/smathew/AV-101/processed_data/mmn/V2/';
-for ii = 7:length(fnames)
+savepath = 'path to save to';
+for ii = 1:length(fnames)
     % not all data have a recording at each visit. it is faster to
     % initially identify if the data can be loaded or not, if it does not
     % exist the error will be caught and we move on to the next subject.
@@ -105,7 +107,7 @@ for ii = 7:length(fnames)
     
 end
 % Visit 3
-savepath = '/data/smathew/AV-101/processed_data/mmn/V3/';
+savepath = '';
 for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
@@ -155,8 +157,8 @@ for ii = 1:length(fnames)
     end
 end
 % Visit 4
-savepath = '/data/smathew/AV-101/processed_data/mmn/V4/';
-for ii = 10:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V4')));
@@ -207,8 +209,8 @@ end
 
 %% ASSR 40
 % Visit 2
-savepath = '/data/smathew/AV-101/processed_data/assr40/V2/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V2')));
@@ -240,8 +242,8 @@ for ii = 12:length(fnames)
     end
 end
 % Visit 3
-savepath = '/data/smathew/AV-101/processed_data/assr40/V3/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V3')));
@@ -273,8 +275,8 @@ for ii = 12:length(fnames)
     end
 end
 % Visit 4
-savepath = '/data/smathew/AV-101/processed_data/assr40/V4/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V4')));
@@ -308,8 +310,8 @@ end
 
 %% ASSR 30
 % Visit 2
-savepath = '/data/smathew/AV-101/processed_data/assr30/V2/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V2')));
@@ -341,8 +343,8 @@ for ii = 12:length(fnames)
     end
 end
 % Visit 3
-savepath = '/data/smathew/AV-101/processed_data/assr30/V3/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V3')));
@@ -374,8 +376,8 @@ for ii = 12:length(fnames)
     end
 end
 % Visit 4
-savepath = '/data/smathew/AV-101/processed_data/assr30/V4/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V4')));
@@ -409,8 +411,8 @@ for ii = 12:length(fnames)
 end
 %% ASSR 20
 % Visit 2
-savepath = '/data/smathew/AV-101/processed_data/assr20/V2/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V2')));
@@ -442,8 +444,8 @@ for ii = 12:length(fnames)
     end
 end
 % Visit 3
-savepath = '/data/smathew/AV-101/processed_data/assr20/V3/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V3')));
@@ -475,8 +477,8 @@ for ii = 12:length(fnames)
     end
 end
 % Visit 4
-savepath = '/data/smathew/AV-101/processed_data/assr20/V4/';
-for ii = 12:length(fnames)
+savepath = '';
+for ii = 1:length(fnames)
     
     eval(['fn=fieldnames(filenames.',fnames{ii},');']);
     fn = find(~cellfun(@isempty,strfind(fn,'V4')));
@@ -508,101 +510,3 @@ for ii = 12:length(fnames)
     end
 end
 
-%% RESTING
-% Visit 2
-savepath = '/data/smathew/AV-101/processed_data/resting/V2/';
-for ii = 9:length(fnames)
-    
-    eval(['fn=fieldnames(filenames.',fnames{ii},');']);
-    fn = find(~cellfun(@isempty,strfind(fn,'V2')));
-    if ~isempty(fn)
-        fnoms = lower(eval(['filenames.',fnames{ii},'.V2.resting'])); % create lower case file names
-        fff = [];
-        for iter = 1:length(timepoints)
-            f=find(~cellfun(@isempty,strfind(fnoms,timepoints{iter})));
-            if ~isempty(f)
-                fff(iter) = f;
-            end
-        end
-        tpp = timepoints(sort(find(fff>0)));
-        %         tpp = timepoints(sort(fff)); % timepoints available
-        for timer = 1:length(eval(['filenames.',fnames{ii},'.V2.resting']))
-            % load appropriate data
-            [EEGloaded,EEG,full_selected_channels] = av101_loaddata(filenames,codes{ii},...
-                visits{1},tasks{1},tpp{timer},chan_cut);
-            % apply filters
-            [EEG] = av101_filter_data(EEG,1,125,250);
-            % wavelet method (runica), without epoching
-            [EEGfinal,~,~,summary] = av101_handle_bad_data(EEG,[],{},fmin,fmax,2,[],[],1);
-            % save
-            savename = [savepath,fnames{ii},'_',tpp{timer},'_',tasks{1},'.mat'];
-            save(savename,'EEGfinal','summary','-v7.3');
-            clear EEGloaded EEG full_selected_channels EEGfinal summary
-        end
-    end
-end
-% Visit 3
-savepath = '/data/smathew/AV-101/processed_data/resting/V3/';
-for ii = 1:length(fnames)
-    
-    eval(['fn=fieldnames(filenames.',fnames{ii},');']);
-    fn = find(~cellfun(@isempty,strfind(fn,'V3')));
-    if ~isempty(fn)
-        fnoms = lower(eval(['filenames.',fnames{ii},'.V3.resting'])); % create lower case file names
-        fff = [];
-        for iter = 1:length(timepoints)
-            f=find(~cellfun(@isempty,strfind(fnoms,timepoints{iter})));
-            if ~isempty(f)
-                fff(iter) = f;
-            end
-        end
-        tpp = timepoints(sort(find(fff>0)));
-        %         tpp = timepoints(sort(fff)); % timepoints available
-        for timer = 1:length(eval(['filenames.',fnames{ii},'.V3.resting']))
-            % load appropriate data
-            [EEGloaded,EEG,full_selected_channels] = av101_loaddata(filenames,codes{ii},...
-                visits{2},tasks{1},tpp{timer},chan_cut);
-            % apply filters
-            [EEG] = av101_filter_data(EEG,1,125,250);
-            % wavelet method (runica), without epoching
-            [EEGfinal,~,~,summary] = av101_handle_bad_data(EEG,[],{},fmin,fmax,2,[],[],1);
-            % save
-            savename = [savepath,fnames{ii},'_',tpp{timer},'_',tasks{1},'.mat'];
-            save(savename,'EEGfinal','summary','-v7.3');
-            clear EEGloaded EEG full_selected_channels EEGfinal summary
-        end
-        
-    end
-end
-% Visit 4
-savepath = '/data/smathew/AV-101/processed_data/resting/V4/';
-for ii = 1:length(fnames)
-    
-    eval(['fn=fieldnames(filenames.',fnames{ii},');']);
-    fn = find(~cellfun(@isempty,strfind(fn,'V4')));
-    if ~isempty(fn)
-        fnoms = lower(eval(['filenames.',fnames{ii},'.V4.resting'])); % create lower case file names
-        fff = [];
-        for iter = 1:length(timepoints)
-            f=find(~cellfun(@isempty,strfind(fnoms,timepoints{iter})));
-            if ~isempty(f)
-                fff(iter) = f;
-            end
-        end
-        tpp = timepoints(sort(find(fff>0)));
-        %         tpp = timepoints(sort(fff)); % timepoints available
-        for timer = 1:length(eval(['filenames.',fnames{ii},'.V4.resting']))
-            % load appropriate data
-            [EEGloaded,EEG,full_selected_channels] = av101_loaddata(filenames,codes{ii},...
-                visits{3},tasks{1},tpp{timer},chan_cut);
-            % apply filters
-            [EEG] = av101_filter_data(EEG,1,125,250);
-            % wavelet method (runica), without epoching
-            [EEGfinal,~,~,summary] = av101_handle_bad_data(EEG,[],{},fmin,fmax,2,[],[],1);
-            % save
-            savename = [savepath,fnames{ii},'_',tpp{timer},'_',tasks{1},'.mat'];
-            save(savename,'EEGfinal','summary','-v7.3');
-            clear EEGloaded EEG full_selected_channels EEGfinal summary
-        end
-    end
-end
